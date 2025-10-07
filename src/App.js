@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+
+import  { useState} from 'react';
 import './App.css';
+import TransactionFeed from './components/TransactionFeed';
+import DashboardMetrics from './components/DashboardMetrics';
 
 function App() {
+  // We will manage the list of all transactions here
+  const [transactions, setTransactions] = useState([]);
+
+  // This function will be called by our simulator to add new transactions
+  const addTransaction = (newTransaction) => {
+    setTransactions(prevTransactions => [newTransaction, ...prevTransactions]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>🚨 Fraud Detection Dashboard</h1>
       </header>
+      <main className="App-main">
+        <DashboardMetrics transactions={transactions} />
+        <TransactionFeed transactions={transactions} addTransaction={addTransaction} />
+      </main>
     </div>
   );
 }

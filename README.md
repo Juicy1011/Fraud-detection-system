@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+# 🚀 Full-Stack Mobile Payment Fraud Detection System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+This project is a comprehensive, full-stack fraud detection system designed to analyze mobile payment transactions in real-time, identify suspicious activity, and display alerts on an interactive monitoring dashboard. It simulates a real-world fintech environment, combining a powerful machine learning backend with a modern, responsive frontend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This system is built to showcase a full range of skills from data science and machine learning to backend API development, frontend user interface design, and DevOps. It is directly inspired by the challenges faced by leading mobile money platforms like M-Pesa.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🌟 Key Features
 
-### `npm test`
+-   **Real-Time Fraud Detection:** A Python-based backend service that uses a trained XGBoost model to predict fraudulent transactions with sub-second latency.
+-   **Interactive Dashboard:** A live-updating dashboard built in React that displays a feed of incoming transactions, highlights fraud alerts, and visualizes key metrics.
+-   **Advanced Machine Learning Pipeline:** The model is trained on a synthetic dataset with realistic fraud patterns. The pipeline includes robust feature engineering, data preprocessing, and model evaluation techniques to handle imbalanced data.
+-   **Full-Stack Architecture:** A clear separation of concerns with a dedicated ML research environment, a backend API for serving the model, and a decoupled frontend for user interaction.
+-   **Containerized & Deployable:** The entire application is containerized using Docker and Docker Compose, allowing for easy, reproducible deployment in any environment.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+-   **Machine Learning (`ml/`):**
+    -   **Python**, **Pandas**, **NumPy** for data manipulation and analysis.
+    -   **Scikit-learn** for data preprocessing and building model pipelines.
+    -   **XGBoost** for the high-performance gradient boosting model.
+    -   **Jupyter Notebook** for research, experimentation, and model training.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   **Backend (`backend/`):**
+    -   **Python** with **Flask** for creating a lightweight and robust REST API.
+    -   **Flask-CORS** for handling cross-origin requests from the frontend.
+    -   **Gunicorn** (for production deployment) as the WSGI server.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   **Frontend (`frontend/`):**
+    -   **React** for building a dynamic and component-based user interface.
+    -   **Axios** for making asynchronous API calls to the backend.
+    -   **Recharts** for creating beautiful and interactive data visualizations.
+    -   **CSS** for custom styling and animations.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   **Deployment & DevOps:**
+    -   **Docker** & **Docker Compose** for containerizing the entire application stack.
 
-### `npm run eject`
+## 📂 Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+fraud-detection-system/
+│
+├── backend/                # Flask API and ML model server
+│   ├── models/
+│   │   └── fraud_detector.pkl  # The saved, trained ML model
+│   ├── app.py              # Main Flask application
+│   └── Dockerfile          # Container definition for the backend
+│
+├── frontend/               # React dashboard application
+│   ├── src/
+│   │   ├── components/     # Reusable React components (charts, feed)
+│   │   └── App.js          # Main application component
+│   └── Dockerfile          # Container definition for the frontend
+│
+├── ml/                     # ML research and training environment
+│   ├── data/
+│   │   └── transactions.csv  # Synthetic dataset
+│   └── fraud_model.ipynb   # Jupyter Notebook for data generation and model training
+│
+├── docker-compose.yml      # Orchestrates the multi-container application
+└── README.md               # You are here!
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🚀 Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-   [Node.js](https://nodejs.org/) (v16 or later)
+-   [Python](https://www.python.org/) (v3.9 or later)
+-   [Docker](https://www.docker.com/products/docker-desktop/) & Docker Compose
 
-## Learn More
+### Running the Application with Docker (Recommended)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This is the easiest way to get the entire full-stack application running.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/juicy1011/fraud-detection-system.git
+    cd fraud-detection-system
+    ```
 
-### Code Splitting
+2.  **Build and run the containers:**
+    ```bash
+    docker-compose up --build
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3.  **Access the application:**
+    -   The **Frontend Dashboard** will be available at `http://localhost:3000`.
+    -   The **Backend API** will be running at `http://localhost:5000`.
 
-### Analyzing the Bundle Size
+### Running Manually (for Development)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**1. Backend Server:**
 
-### Making a Progressive Web App
+```bash
+# Navigate to the backend directory
+cd backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-### Advanced Configuration
+# Install dependencies
+pip install -r requirements.txt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Run the Flask server
+python app.py
+```
+The backend will be running on `http://localhost:5000`.
 
-### Deployment
+**2. Frontend Dashboard:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+# Open a new terminal and navigate to the frontend directory
+cd frontend
 
-### `npm run build` fails to minify
+# Install dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Run the React development server
+npm start
+```
+The frontend will open in your browser at `http://localhost:3000`.
+
+## 🧠 Machine Learning Model Insights
+
+The fraud detection model is an `XGBoost Classifier` trained on a synthetically generated dataset of over 50,000 transactions.
+
+### Feature Engineering
+The model's performance relies on carefully engineered features, including:
+-   **Time-based Features:** Hour of the day and day of the week to capture temporal patterns.
+-   **Behavioral Features:**
+    -   `time_since_last_txn`: Time elapsed since the user's last transaction.
+    -   `amount_deviation`: How much a transaction amount deviates from the user's historical average.
+    -   `txn_count_24h`: The number of transactions a user has made in the last 24 hours.
+
+### Handling Imbalanced Data
+Since fraud is a rare event, the model was trained using techniques to handle class imbalance, such as `scale_pos_weight` in XGBoost, ensuring it pays extra attention to fraudulent cases. The result is a model with high **recall** for the fraud class, minimizing the risk of missing actual fraud.
+
+
+
+**Live Dashboard View:**
+![Dashboard Screenshot](<INSERT_SCREENSHOT_URL_HERE>)
+
+**Fraud Alert Example:**
+![Fraud Alert Screenshot](<INSERT_ALERT_SCREENSHOT_URL_HERE>)
+
+## Future Improvements
+
+-   [ ] **Database Integration:** Persist all incoming transactions and their fraud scores to a PostgreSQL database.
+-   [ ] **User Authentication:** Add role-based access for security analysts.
+-   [ ] **Explainable AI (XAI):** Integrate SHAP or LIME to explain *why* a specific transaction was flagged as fraudulent.
+-   [ ] **Real-time Alerting:** Send alerts via Email (SendGrid) or SMS (Twilio / Africa's Talking).

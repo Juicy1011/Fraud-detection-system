@@ -1,0 +1,9 @@
+.metrics-container {
+  background-color: #25282e;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+.chart {
+  margin-top: 20px;
+}
